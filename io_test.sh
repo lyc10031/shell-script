@@ -6,6 +6,8 @@ test_emmc_io () {
 	echo -e "\n" >> /root/write_test.log
 	dd if=/dev/zero of=/mnt/emmc_io_test/read_test.log bs=1M count=15k conv=fsync 2>> /root/write_test.log
 	echo -e "\n" >> /root/write_test.log
+	
+	sync && echo 1 > /proc/sys/vm/drop_caches
 
 	echo -e "\n" >> /root/read_test.log
 	dd if=/mnt/emmc_io_test/read_test.log of=/dev/null bs=1M count=15k  2>> /root/read_test.log
